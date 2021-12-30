@@ -1,0 +1,18 @@
+{
+  "reports":[
+  {
+    "fieldName": "NK-26-3 - EKO",
+    "reportDate": "2021-05-25",
+    "cropEvaluation": "average"
+  },
+  {
+    "fieldName": "SA-147-10 - EKO2",
+    "reportDate": "2021-05-19",
+    "cropEvaluation": "good"
+  },
+  {
+    "fieldName": "DJ-6 - EKO",
+    "reportDate": "2021-03-06",
+    "cropEvaluation": "average"
+  }]
+}
