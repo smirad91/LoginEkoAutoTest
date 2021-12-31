@@ -1,10 +1,10 @@
-from Lib.basic.LogHTML import LogHTML
+from ..basic.LogHTML import LogHTML
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
-from Lib.basic.Test import fail_test
-from Lib.basic.WaitAction import wait_until, wait
-from Lib.basic.WebElement import click
+from ..basic.Test import fail_test
+from ..basic.WaitAction import wait_until, wait
+from ..basic.WebElement import click
 
 
 def rbtnNDVI(browser):

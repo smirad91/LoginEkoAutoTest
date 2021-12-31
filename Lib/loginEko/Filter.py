@@ -1,8 +1,8 @@
-from Lib.basic.LogHTML import LogHTML
+from ..basic.LogHTML import LogHTML
 from selenium.webdriver.common.by import By
 
-from Lib.basic.WaitAction import wait_until, wait
-from Lib.basic.WebElement import click
+from ..basic.WaitAction import wait_until, wait
+from ..basic.WebElement import click
 
 
 def divCrops(browser):
