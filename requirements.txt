@@ -1,0 +1,4 @@
+pywin32==302
+selenium==4.1.0
+tabulate==0.8.9
+urllib3==1.26.7
