@@ -5,7 +5,8 @@ from Lib.basic import CMDLog
 from Lib.basic.Browser import Browser
 from Lib.basic.LogHTML import LogHTML
 
-
+beforeEach=[lambda: print("fd")]
+afterEach=[lambda: print("fd")]
 
 def test(*args, **kwargs):
     """
@@ -48,7 +49,11 @@ def test(*args, **kwargs):
         if shouldExecute:
             startTime = time.time()
             try:
+                if beforeEach!=None:
+                    beforeEach[0]()
                 func()
+                if afterEach!=None:
+                    afterEach[0]()
                 endTime = time.time()
                 duration = endTime - startTime
                 testResult = (func.__name__, dsc, "Sucedded. {}".format(info), startDateTime, str(duration).split(".")[0])
@@ -84,5 +89,14 @@ def test(*args, **kwargs):
             CMDLog.CMDLog.testResults=[testResult]
     return wrapper
 
+def beforeEachTest():
+    def wrapper(func):
+        beforeEach[0]=func
+    return wrapper
 
+
+def afterEachTest():
+    def wrapper(func):
+        afterEach[0]=func
+    return wrapper
 
