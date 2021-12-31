@@ -39,7 +39,7 @@ def isScaleShown(browser):
 
 def waitDisplayOptionsLoaded(browser):
     wait_until(lambda: rbtnRGB(browser), timeout=5)
-    LogHTML.screenshot("Display options is loaded")
+    LogHTML.screenshot(browser, "Display options is loaded")
 
 def selectNDVI(browser):
     click(lambda: rbtnNDVI(browser))
@@ -52,7 +52,7 @@ def selectRGB(browser):
 
 def assertTooltipShown(browser):
     wait_until(lambda: divTooltipScale(browser), timeout=3)
-    LogHTML.screenshot("Tooltip is shown")
+    LogHTML.screenshot(browser, "Tooltip is shown")
 
 def moveMouseToScale(browser):
     action = ActionChains(browser.driver)

@@ -48,7 +48,7 @@ def getCropListItems(browser):
         if listItem.get_attribute("class")!="show-more":
             cropListItems.append(listItem)
           #  cropListItemsNames.append()
-    LogHTML.info("Crop list items "+cropListItemsNames)
+    # LogHTML.info("Crop list items "+cropListItemsNames)
     return cropListItems
 
 def getOperationListItems(browser):

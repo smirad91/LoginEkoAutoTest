@@ -22,9 +22,10 @@ def send_text(element, text, mode="update"):
     elif mode is "update":
         element().clear()
         element().send_keys(text)
+        wait_until(lambda: element().get_attribute("value")==text, 3)
     else:
         raise Exception("Possible values for mode are set and update. Given mode is={}".format(mode))
-    wait_until(lambda: element().get_attribute("value")==text, 3)
+
 
 def send_keys(element, key):
     """
