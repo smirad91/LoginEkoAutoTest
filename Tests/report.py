@@ -1,9 +1,9 @@
-from ..Lib.basic.LogHTML import LogHTML
-from ..Lib.basic.Test import fail_test
+from Lib.basic.LogHTML import LogHTML
+from Lib.basic.Test import fail_test
 
-from ..Lib.basic.Browser import Browser
-from ..Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
-from ..Lib.loginEko import Login, Filter, MainDashboard, Report, Config
+from Lib.basic.Browser import Browser
+from Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
+from Lib.loginEko import Login, Filter, MainDashboard, Report, Config
 
 
 @beforeEachTest()

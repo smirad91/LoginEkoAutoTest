@@ -2,10 +2,10 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
-from ..basic.LogHTML import LogHTML
-from ..basic.Test import fail_test
-from ..basic.WaitAction import wait, wait_until
-from ..basic.WebElement import send_text, click, send_keys
+from Lib.basic.LogHTML import LogHTML
+from Lib.basic.Test import fail_test
+from Lib.basic.WaitAction import wait, wait_until
+from Lib.basic.WebElement import send_text, click, send_keys
 
 
 def divReports(browser):

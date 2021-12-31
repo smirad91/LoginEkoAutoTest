@@ -1,7 +1,7 @@
-from ..Lib.basic.Browser import Browser
-from ..Lib.basic.Test import fail_test
-from ..Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
-from ..Lib.loginEko import Login, Filter, MainDashboard, DisplayOptions
+from Lib.basic.Browser import Browser
+from Lib.basic.Test import fail_test
+from Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
+from Lib.loginEko import Login, Filter, MainDashboard, DisplayOptions
 
 browser = None
 

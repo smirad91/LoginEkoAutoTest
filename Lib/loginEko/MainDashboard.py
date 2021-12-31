@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from ..basic.WebElement import click
+from Lib.basic.WebElement import click
 
 
 def divDisplayOptions(browser):

@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
-from ..basic.WaitAction import wait_page_load
-from ..basic.WebElement import send_text, click
+from Lib.basic.WaitAction import wait_page_load
+from Lib.basic.WebElement import send_text, click
 
 
 def inpUsername(browser):
