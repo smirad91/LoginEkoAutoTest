@@ -20,7 +20,7 @@ def divTooltipScale(browser):
     return browser.driver.find_element(By.CLASS_NAME, "menuable__content__active")
 
 def inpDisplayOptionsClickable(browser, optionName):
-    return browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='"+optionName+"']").find_element_by_xpath("../..")
+    return browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='{}']".format(optionName)).find_element_by_xpath("../..")
 
 def divFilterNumber(browser):
     return browser.driver.find_element(By.CSS_SELECTOR, "div[test-counter-number='display-options']")
@@ -77,7 +77,7 @@ def assertOptionsSelected(browser, optionNames):
 
 def assertOptionSelected(browser, optionName):
     wait(2)
-    option = browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='"+optionName+"']")
+    option = browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='{}']".format(optionName))
     if option.get_attribute("aria-checked")=="true":
         pass
     else:
@@ -93,5 +93,5 @@ def selectOption(browser, displayOption):
 
 def assertFilterNumber(browser, expectedNumber):
     wait_until(lambda: int(divFilterNumber(browser).text)==expectedNumber, timeout=5)
-    LogHTML.info("Filter number is: "+expectedNumber)
+    LogHTML.info("Filter number is: {}".format(expectedNumber))
 

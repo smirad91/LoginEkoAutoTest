@@ -70,7 +70,7 @@ def returnBackOpenedReport(browser):
 
 def assertDataOnOpenedReport(browser, date):
     if date not in divOpenedReport(browser).text.lower():
-        fail_test(browser, "Expected data not shown. Expected date: "+date)
+        fail_test(browser, "Expected data not shown. Expected date: {}".format(date))
 
 def searchReport(browser, reportName):
     click(lambda: inpSearch(browser))
