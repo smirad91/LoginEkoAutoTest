@@ -7,7 +7,7 @@ from Lib.loginEko import Login, Filter, MainDashboard, Report, Config
 
 
 @beforeEachTest()
-def tgm4():
+def before():
     global browser
     browser=Browser()
     browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
@@ -15,13 +15,12 @@ def tgm4():
     Filter.wait_filter_loaded(browser)
 
 @afterEachTest()
-def tgm4():
+def after():
     global browser
     browser.close_browser()
 
-@test(dsc="Check scale icon for RGB NDVI visibility")
-def test1():
-
+@test(dsc="Assert reports exist")
+def checkReportsExist():
     MainDashboard.openReports(browser)
     Report.waitReportMenuLoaded(browser)
     failTest=False

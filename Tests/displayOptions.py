@@ -6,7 +6,7 @@ from Lib.loginEko import Login, Filter, MainDashboard, DisplayOptions
 browser = None
 
 @beforeEachTest()
-def tgm4():
+def before():
     global browser
     browser=Browser()
     browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
@@ -14,7 +14,7 @@ def tgm4():
     Filter.wait_filter_loaded(browser)
 
 @afterEachTest()
-def tgm4():
+def after():
     global browser
     browser.close_browser()
 
@@ -22,8 +22,7 @@ def tgm4():
 
 
 @test(dsc="Check scale icon for RGB NDVI visibility")
-def test1():
-
+def scaleIconVisibility():
     MainDashboard.openDisplayOptions(browser)
     DisplayOptions.waitDisplayOptionsLoaded(browser)
     DisplayOptions.selectNDVI(browser)
@@ -35,17 +34,15 @@ def test1():
 
 
 @test(dsc="Check tooltip on scale")
-def test1():
-
+def scaleTooltip():
     MainDashboard.openDisplayOptions(browser)
     DisplayOptions.waitDisplayOptionsLoaded(browser)
     DisplayOptions.selectNDVI(browser)
     DisplayOptions.moveMouseToScale(browser)
 
 
-@test(dsc="Filter number 2 for NDVI drone and weather station selected")
-def test1():
-
+@test(dsc="Check filter number is 2 for NDVI drone and weather station selected")
+def checkFilterNumber():
     MainDashboard.openDisplayOptions(browser)
     DisplayOptions.waitDisplayOptionsLoaded(browser)
     DisplayOptions.selectNDVI(browser)

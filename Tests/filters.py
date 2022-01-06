@@ -4,7 +4,7 @@ from Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
 from Lib.loginEko import Login, Filter
 
 @beforeEachTest()
-def tgm4():
+def before():
     global browser
     browser=Browser()
     browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
@@ -12,12 +12,12 @@ def tgm4():
     Filter.wait_filter_loaded(browser)
 
 @afterEachTest()
-def tgm4():
+def after():
     global browser
     browser.close_browser()
 
 @test(dsc="Check state after login")
-def test1():
+def filterAfterLogin():
     if len(Filter.getCropListItems(browser))>5:
         fail_test(browser, "crop list item more than 5")
 
@@ -29,22 +29,21 @@ def test1():
 
 
 @test(dsc="Show more/less crops")
-def test1():
+def showMoreCrops():
     Filter.showMoreCrops(browser)
     Filter.showLessCrops(browser)
 
 
 @test(dsc="Show more/less operations")
-def test1():
+def showMoreOperations():
     Filter.showMoreOperation(browser)
     Filter.showLessOperation(browser)
 
 @test(dsc="Show more/less monitor")
-def test1():
+def showMoreMonitor():
     Filter.showMoreMonitoring(browser)
     Filter.showLessMonitoring(browser)
 
-
 @test(dsc="Check monitoring add filter dropdown")
-def test1():
+def monitoringAddFilter():
     Filter.checkAddFilterDropdown(browser)
