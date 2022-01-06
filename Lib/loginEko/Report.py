@@ -1,3 +1,5 @@
+import datetime
+
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -34,9 +36,7 @@ def convertDate(dateString):
     :param dateString:
     :return:
     """
-    dateInfo = dateString.split("-")
-    months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "avg","sep", "oct", "nov", "dec"]
-    return dateInfo[2]+" "+ months[int(dateInfo[1])-1]+" "+dateInfo[0]
+    return datetime.datetime.strptime(dateString, "%Y-%m-%d").strftime("%#d %b %Y").lower()
 
 def waitReportMenuLoaded(browser):
     wait_until(lambda: len(divReports(browser).find_elements_by_xpath("./div[1]/div[1]/*"))>10, timeout=5)
@@ -50,7 +50,7 @@ def openReportWithScroll(browser, report):
     while(not opened):
         index+=1
         for r in divReportsList(browser):
-            if report["fieldName"] in r.text and convertDate(report["reportDate"]).lower() in r.text.lower():
+            if report["fieldName"] in r.text and convertDate(report["reportDate"]) in r.text.lower():
                 click(lambda: r)
                 opened = True
         if not opened:
@@ -69,7 +69,7 @@ def returnBackOpenedReport(browser):
     waitReportMenuLoaded(browser)
 
 def assertDataOnOpenedReport(browser, date):
-    if date not in divOpenedReport(browser).text:
+    if date not in divOpenedReport(browser).text.lower():
         fail_test(browser, "Expected data not shown. Expected date: "+date)
 
 def searchReport(browser, reportName):
