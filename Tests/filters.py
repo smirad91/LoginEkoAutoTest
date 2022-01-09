@@ -8,7 +8,7 @@ def before():
     global browser
     browser=Browser()
     browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
-    Login.loginGUI(browser, "e2e_tester", "h3lp1ngh4nd")
+    Login.login_GUI(browser, "e2e_tester", "h3lp1ngh4nd")
     Filter.wait_filter_loaded(browser)
 
 @afterEachTest()
@@ -18,32 +18,32 @@ def after():
 
 @test(dsc="Check state after login")
 def filterAfterLogin():
-    if len(Filter.getCropListItems(browser))>5:
+    if len(Filter.get_crop_list_items(browser))>5:
         fail_test(browser, "crop list item more than 5")
 
-    if len(Filter.getOperationListItems(browser))>5:
+    if len(Filter.get_operation_list_items(browser))>5:
         fail_test(browser, "crop list item more than 5")
 
-    if len(Filter.getMonitorListItems(browser))>5:
+    if len(Filter.get_monitor_list_items(browser))>5:
         fail_test(browser, "crop list item more than 5")
 
 
 @test(dsc="Show more/less crops")
 def showMoreCrops():
-    Filter.showMoreCrops(browser)
-    Filter.showLessCrops(browser)
+    Filter.show_more_crops(browser)
+    Filter.show_less_crops(browser)
 
 
 @test(dsc="Show more/less operations")
 def showMoreOperations():
-    Filter.showMoreOperation(browser)
-    Filter.showLessOperation(browser)
+    Filter.show_more_operation(browser)
+    Filter.show_less_operation(browser)
 
 @test(dsc="Show more/less monitor")
 def showMoreMonitor():
-    Filter.showMoreMonitoring(browser)
-    Filter.showLessMonitoring(browser)
+    Filter.show_more_monitoring(browser)
+    Filter.show_less_monitoring(browser)
 
 @test(dsc="Check monitoring add filter dropdown")
 def monitoringAddFilter():
-    Filter.checkAddFilterDropdown(browser)
+    Filter.check_add_filter_dropdown(browser)

@@ -11,7 +11,7 @@ def before():
     global browser
     browser=Browser()
     browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
-    Login.loginGUI(browser, "e2e_tester", "h3lp1ngh4nd")
+    Login.login_GUI(browser, "e2e_tester", "h3lp1ngh4nd")
     Filter.wait_filter_loaded(browser)
 
 @afterEachTest()
@@ -19,16 +19,18 @@ def after():
     global browser
     browser.close_browser()
 
+
+
 @test(dsc="Assert reports exist")
 def checkReportsExist():
-    MainDashboard.openReports(browser)
-    Report.waitReportMenuLoaded(browser)
+    MainDashboard.open_reports(browser)
+    Report.wait_report_menu_loaded(browser)
     failTest=False
     for r in Config.get("reports"):
         try:
             LogHTML.info("Try to find report {}".format(r))
-            Report.searchReport(browser, r["fieldName"])
-            Report.openReportWithScroll(browser, r)
+            Report.search_report(browser, r["fieldName"])
+            Report.open_report_with_scroll(browser, r)
             LogHTML.info("Report {} found".format(r))
         except:
             failTest = True

@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from Lib.basic.WaitAction import wait_page_load
 from Lib.basic.WebElement import send_text, click
 
@@ -15,14 +14,8 @@ def btnSignIn(browser):
 
 
 
-def loginGUI(browser, username, password):
+def login_GUI(browser, username, password):
     send_text(lambda: inpUsername(browser), username)
     send_text(lambda: inpPassword(browser), password)
     click(lambda: btnSignIn(browser))
     wait_page_load(browser)
-
-def loginProgramatically():
-    raise NotImplementedError
-
-
-

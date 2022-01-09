@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from Lib.basic.WebElement import click
 
 
@@ -11,8 +10,8 @@ def divReports(browser):
 
 
 
-def openDisplayOptions(browser):
+def open_display_options(browser):
     click(lambda: divDisplayOptions(browser))
 
-def openReports(browser):
+def open_reports(browser):
     click(lambda: divReports(browser))

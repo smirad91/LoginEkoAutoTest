@@ -19,8 +19,9 @@ def divNDVIScale(browser):
 def divTooltipScale(browser):
     return browser.driver.find_element(By.CLASS_NAME, "menuable__content__active")
 
-def inpDisplayOptionsClickable(browser, optionName):
-    return browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='{}']".format(optionName)).find_element_by_xpath("../..")
+def inpDisplayOptionsClickable(browser, option_name):
+    return browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='{}']"
+                                       .format(option_name)).find_element_by_xpath("../..")
 
 def divFilterNumber(browser):
     return browser.driver.find_element(By.CSS_SELECTOR, "div[test-counter-number='display-options']")
