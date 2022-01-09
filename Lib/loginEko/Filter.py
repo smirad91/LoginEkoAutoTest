@@ -1,6 +1,5 @@
 from Lib.basic.LogHTML import LogHTML
 from selenium.webdriver.common.by import By
-
 from Lib.basic.WaitAction import wait_until, wait
 from Lib.basic.WebElement import click
 
@@ -37,65 +36,76 @@ def divWeedsAddFilter(browser):
 
 
 
+
 def wait_filter_loaded(browser):
-    wait_until(lambda: len(divCrops(browser).find_elements_by_xpath('./div[2]/*'))>3)
+    wait_until(lambda: len(divCrops(browser).find_elements_by_xpath('./div[2]/*')) > 3)
     LogHTML.info("Filter menu loaded")
 
-def getCropListItems(browser):
-    cropListItems=[]
-    cropListItemsNames=[]
+
+def get_crop_list_items(browser):
+    crop_list_items = []
+    # cropListItemsNames = []
     for listItem in divCrops(browser).find_elements_by_xpath('./div[2]/*'):
-        if listItem.get_attribute("class")!="show-more":
-            cropListItems.append(listItem)
-          #  cropListItemsNames.append()
+        if listItem.get_attribute("class") != "show-more":
+            crop_list_items.append(listItem)
+        #  cropListItemsNames.append()
     # LogHTML.info("Crop list items {}".format(cropListItemsNames))
-    return cropListItems
+    return crop_list_items
 
-def getOperationListItems(browser):
-    cropListItems=[]
+
+def get_operation_list_items(browser):
+    crop_list_items = []
     for listItem in divOperations(browser).find_elements_by_xpath('./div[2]/*'):
-        if listItem.get_attribute("class")!="show-more":
-            cropListItems.append(listItem)
-    return cropListItems
+        if listItem.get_attribute("class") != "show-more":
+            crop_list_items.append(listItem)
+    return crop_list_items
 
-def getMonitorListItems(browser):
-    cropListItems=[]
+
+def get_monitor_list_items(browser):
+    crop_list_items = []
     for listItem in divMonitoring(browser).find_elements_by_xpath('./div[2]/*'):
-        if listItem.get_attribute("class")!="show-more":
-            cropListItems.append(listItem)
-    return cropListItems
+        if listItem.get_attribute("class") != "show-more":
+            crop_list_items.append(listItem)
+    return crop_list_items
 
-def showMoreCrops(browser):
-    listNumberBefore = len(getCropListItems(browser))
+
+def show_more_crops(browser):
+    list_number_before = len(get_crop_list_items(browser))
     click(lambda: divShowMoreCrops(browser))
-    wait_until(lambda: listNumberBefore<len(getCropListItems(browser)))
+    wait_until(lambda: list_number_before < len(get_crop_list_items(browser)))
 
-def showLessCrops(browser):
-    listNumberBefore = len(getCropListItems(browser))
+
+def show_less_crops(browser):
+    list_number_before = len(get_crop_list_items(browser))
     click(lambda: divShowMoreCrops(browser))
-    wait_until(lambda: listNumberBefore>len(getCropListItems(browser)))
+    wait_until(lambda: list_number_before > len(get_crop_list_items(browser)))
 
-def showMoreOperation(browser):
-    listNumberBefore = len(getOperationListItems(browser))
+
+def show_more_operation(browser):
+    list_number_before = len(get_operation_list_items(browser))
     click(lambda: divShowMoreOperations(browser))
-    wait_until(lambda: listNumberBefore<len(getOperationListItems(browser)))
+    wait_until(lambda: list_number_before < len(get_operation_list_items(browser)))
 
-def showLessOperation(browser):
-    listNumberBefore = len(getOperationListItems(browser))
+
+def show_less_operation(browser):
+    list_number_before = len(get_operation_list_items(browser))
     click(lambda: divShowMoreOperations(browser))
-    wait_until(lambda: listNumberBefore>len(getOperationListItems(browser)))
+    wait_until(lambda: list_number_before > len(get_operation_list_items(browser)))
 
-def showMoreMonitoring(browser):
-    listNumberBefore = len(getMonitorListItems(browser))
+
+def show_more_monitoring(browser):
+    list_number_before = len(get_monitor_list_items(browser))
     click(lambda: divShowMoreMonitoring(browser))
-    wait_until(lambda: listNumberBefore>len(getMonitorListItems(browser)))
+    wait_until(lambda: list_number_before > len(get_monitor_list_items(browser)))
 
-def showLessMonitoring(browser):
-    listNumberBefore = len(getMonitorListItems(browser))
+
+def show_less_monitoring(browser):
+    list_number_before = len(get_monitor_list_items(browser))
     click(lambda: divShowMoreMonitoring(browser))
-    wait_until(lambda: listNumberBefore>len(getMonitorListItems(browser)))
+    wait_until(lambda: list_number_before > len(get_monitor_list_items(browser)))
 
-def checkAddFilterDropdown(browser):
+
+def check_add_filter_dropdown(browser):
     click(lambda: btnAddFilter(browser))
     wait_until(lambda: divSoilAddFilter(browser))
     wait_until(lambda: divRatingsAddFilter(browser))

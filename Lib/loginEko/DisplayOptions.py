@@ -6,8 +6,6 @@ from Lib.basic.WaitAction import wait_until, wait
 from Lib.basic.WebElement import click
 
 
-### DOM elements
-
 
 def rbtnNDVI(browser):
     return browser.driver.find_element(By.CSS_SELECTOR, "input[value='ndvi']").find_element_by_xpath('..')
@@ -27,8 +25,6 @@ def inpDisplayOptionsClickable(browser, optionName):
 def divFilterNumber(browser):
     return browser.driver.find_element(By.CSS_SELECTOR, "div[test-counter-number='display-options']")
 
-
-### Methods
 
 def is_scale_shown(browser):
     wait(1)
