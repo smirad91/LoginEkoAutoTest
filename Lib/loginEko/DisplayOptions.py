@@ -1,10 +1,12 @@
 from Lib.basic.LogHTML import LogHTML
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
-
 from Lib.basic.Test import fail_test
 from Lib.basic.WaitAction import wait_until, wait
 from Lib.basic.WebElement import click
+
+
+### DOM elements
 
 
 def rbtnNDVI(browser):
@@ -26,8 +28,9 @@ def divFilterNumber(browser):
     return browser.driver.find_element(By.CSS_SELECTOR, "div[test-counter-number='display-options']")
 
 
+### Methods
 
-def isScaleShown(browser):
+def is_scale_shown(browser):
     wait(1)
     try:
         divNDVIScale(browser)
@@ -37,61 +40,70 @@ def isScaleShown(browser):
         LogHTML.info("Scale is not shown")
         return False
 
-def waitDisplayOptionsLoaded(browser):
+
+def wait_display_options_loaded(browser):
     wait_until(lambda: rbtnRGB(browser), timeout=5)
     LogHTML.screenshot(browser, "Display options is loaded")
 
-def selectNDVI(browser):
+
+def select_NDVI(browser):
     click(lambda: rbtnNDVI(browser))
-    #assertOptionSelected
+    #assert_option_selected
 
-def selectRGB(browser):
+
+def select_RGB(browser):
     click(lambda: rbtnRGB(browser))
-    #assertOptionSelected(browser, )
+    #assert_option_selected(browser, )
 
 
-def assertTooltipShown(browser):
+def assert_tooltip_shown(browser):
     wait_until(lambda: divTooltipScale(browser), timeout=3)
     LogHTML.screenshot(browser, "Tooltip is shown")
 
-def moveMouseToScale(browser):
+
+def move_mouse_to_scale(browser):
     action = ActionChains(browser.driver)
     action.move_to_element(divNDVIScale(browser))
     action.perform()
-    assertTooltipShown(browser)
+    assert_tooltip_shown(browser)
 
-def assertOptionsSelected(browser, optionNames):
+
+def assert_options_selected(browser, option_names):
     """
      DisplayOption parameter is a list of values that can be found in dom elements with attribute test-display-option.
      in chrome browser, when display option is shown, search in elements tab for "test-display-option"
      (weather, arable, treeBuffers...)
      """
     wait(2)
-    selectedOptions=[]
-    allOptions = browser.driver.find_elements_by_xpath("//input[@test-display-option]")
-    for s in allOptions:
-        if s.get_attribute("aria-checked")=="true":
-            selectedOptions.append(s.get_attribute("test-display-option"))
-    if set(optionNames)!=set(selectedOptions):
-        fail_test(browser, "selected wrong. On browser selected {0}, expected: {1}".format(selectedOptions, optionNames))
+    selected_options=[]
+    all_options = browser.driver.find_elements_by_xpath("//input[@test-display-option]")
+    for s in all_options:
+        if s.get_attribute("aria-checked") == "true":
+            selected_options.append(s.get_attribute("test-display-option"))
+    if set(option_names)!=set(selected_options):
+        fail_test(browser, "selected wrong. On browser selected {0}, expected: {1}"
+                  .format(selected_options, option_names))
 
-def assertOptionSelected(browser, optionName):
+
+def assert_option_selected(browser, option_name):
     wait(2)
-    option = browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='{}']".format(optionName))
-    if option.get_attribute("aria-checked")=="true":
+    option = browser.driver.find_element(By.CSS_SELECTOR, "input[test-display-option='{}']".format(option_name))
+    if option.get_attribute("aria-checked") == "true":
         pass
     else:
         fail_test(browser, "not selected")
 
-def selectOption(browser, displayOption):
+
+def select_option(browser, display_option):
     """
     DisplayOption parameter can be found in elements with attribute test-display-option
     (weather, arable, treeBuffers...)
     """
-    click(lambda: inpDisplayOptionsClickable(browser, displayOption))
-    assertOptionSelected(browser, displayOption)
+    click(lambda: inpDisplayOptionsClickable(browser, display_option))
+    assert_option_selected(browser, display_option)
 
-def assertFilterNumber(browser, expectedNumber):
-    wait_until(lambda: int(divFilterNumber(browser).text)==expectedNumber, timeout=5)
-    LogHTML.info("Filter number is: {}".format(expectedNumber))
+
+def assert_filter_number(browser, expected_number):
+    wait_until(lambda: int(divFilterNumber(browser).text) == expected_number, timeout=5)
+    LogHTML.info("Filter number is: {}".format(expected_number))
 
