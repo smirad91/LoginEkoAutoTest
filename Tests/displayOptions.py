@@ -8,7 +8,7 @@ browser = None
 @beforeEachTest()
 def before():
     global browser
-    browser=Browser()
+    browser = Browser()
     browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
     Login.login_GUI(browser, "e2e_tester", "h3lp1ngh4nd")
     Filter.wait_filter_loaded(browser)

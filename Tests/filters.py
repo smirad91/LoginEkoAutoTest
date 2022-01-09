@@ -3,6 +3,8 @@ from Lib.basic.Test import fail_test
 from Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
 from Lib.loginEko import Login, Filter
 
+browser = None
+
 @beforeEachTest()
 def before():
     global browser
@@ -16,15 +18,17 @@ def after():
     global browser
     browser.close_browser()
 
+
+
 @test(dsc="Check state after login")
 def filterAfterLogin():
-    if len(Filter.get_crop_list_items(browser))>5:
+    if len(Filter.get_crop_list_items(browser)) > 5:
         fail_test(browser, "crop list item more than 5")
 
-    if len(Filter.get_operation_list_items(browser))>5:
+    if len(Filter.get_operation_list_items(browser)) > 5:
         fail_test(browser, "crop list item more than 5")
 
-    if len(Filter.get_monitor_list_items(browser))>5:
+    if len(Filter.get_monitor_list_items(browser)) > 5:
         fail_test(browser, "crop list item more than 5")
 
 
@@ -39,10 +43,12 @@ def showMoreOperations():
     Filter.show_more_operation(browser)
     Filter.show_less_operation(browser)
 
+
 @test(dsc="Show more/less monitor")
 def showMoreMonitor():
     Filter.show_more_monitoring(browser)
     Filter.show_less_monitoring(browser)
+
 
 @test(dsc="Check monitoring add filter dropdown")
 def monitoringAddFilter():

@@ -39,7 +39,8 @@ def is_scale_shown(browser):
 
 
 def wait_display_options_loaded(browser):
-    wait_until(lambda: rbtnRGB(browser), timeout=5)
+    wait_until(lambda: rbtnRGB(browser), timeout=5,
+               errorMessage="RGB radiobutton not on screen")
     LogHTML.screenshot(browser, "Display options is loaded")
 
 
@@ -54,7 +55,8 @@ def select_RGB(browser):
 
 
 def assert_tooltip_shown(browser):
-    wait_until(lambda: divTooltipScale(browser), timeout=3)
+    wait_until(lambda: divTooltipScale(browser), timeout=3,
+               errorMessage="Tooltip not shown")
     LogHTML.screenshot(browser, "Tooltip is shown")
 
 
@@ -72,12 +74,12 @@ def assert_options_selected(browser, option_names):
      (weather, arable, treeBuffers...)
      """
     wait(2)
-    selected_options=[]
+    selected_options = []
     all_options = browser.driver.find_elements_by_xpath("//input[@test-display-option]")
     for s in all_options:
         if s.get_attribute("aria-checked") == "true":
             selected_options.append(s.get_attribute("test-display-option"))
-    if set(option_names)!=set(selected_options):
+    if set(option_names) != set(selected_options):
         fail_test(browser, "selected wrong. On browser selected {0}, expected: {1}"
                   .format(selected_options, option_names))
 
@@ -101,6 +103,8 @@ def select_option(browser, display_option):
 
 
 def assert_filter_number(browser, expected_number):
-    wait_until(lambda: int(divFilterNumber(browser).text) == expected_number, timeout=5)
+    wait_until(lambda: int(divFilterNumber(browser).text) == expected_number, timeout=5,
+               errorMessage="Filter number is different than expected. Expected: {0}, actual:{1}"
+               .format(expected_number, divFilterNumber(browser).text))
     LogHTML.info("Filter number is: {}".format(expected_number))
 

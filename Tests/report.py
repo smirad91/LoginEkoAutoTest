@@ -25,15 +25,16 @@ def after():
 def checkReportsExist():
     MainDashboard.open_reports(browser)
     Report.wait_report_menu_loaded(browser)
-    failTest=False
+    test_should_fail=False
     for r in Config.get("reports"):
         try:
             LogHTML.info("Try to find report {}".format(r))
-            Report.search_report(browser, r["fieldName"])
+            Report.input_text(browser, r["fieldName"])
             Report.open_report_with_scroll(browser, r)
             LogHTML.info("Report {} found".format(r))
-        except:
-            failTest = True
+        except Exception as e:
+            test_should_fail = True
+            LogHTML.info("Error:".format(e))
             LogHTML.info("Report {} not found".format(r))
-    if failTest:
+    if test_should_fail:
         fail_test(browser, "Some reports not found")

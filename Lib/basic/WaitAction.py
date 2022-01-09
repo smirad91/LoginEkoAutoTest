@@ -37,6 +37,8 @@ def wait_until(somepredicate, timeout=20, period=1, errorMessage="Timeout expire
         time.sleep(period)
     if should_test_fail:
         raise Exception(errorMessage)
+    else:
+        return False
 
 def wait_element_visible(browser, cssSelector, timeout=500):
     """

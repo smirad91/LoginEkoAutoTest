@@ -38,7 +38,8 @@ def convert_date(dateString):
 
 
 def wait_report_menu_loaded(browser):
-    wait_until(lambda: len(divReports(browser).find_elements_by_xpath("./div[1]/div[1]/*")) > 10, timeout=5)
+    wait_until(lambda: len(divReports(browser).find_elements_by_xpath("./div[1]/div[1]/*")) > 10,
+               timeout=5, errorMessage="Report menu from left side not loaded")
 
 
 def open_report_with_scroll(browser, report):
@@ -59,8 +60,11 @@ def open_report_with_scroll(browser, report):
             wait(3)
         if index == 5:
             fail_test(browser, "Report not found in 20 scrolls. Stop the test")
-    wait_until(lambda: divOpenedReport(browser), 5)
-    wait_until(lambda: report["fieldName"] in divOpenedReport(browser).text, timeout=1)
+    wait_until(lambda: divOpenedReport(browser), timeout=5, errorMessage="Report is not opened")
+    wait_until(lambda: report["fieldName"] in divOpenedReport(browser).text, timeout=1,
+               errorMessage="Text not found in opened report. Expected: {}, found: {}."
+               .format(report["fieldName"], divOpenedReport(browser).text))
+
     assert_data_on_opened_report(browser, convert_date(report["reportDate"]))
     assert_data_on_opened_report(browser, report["cropEvaluation"])
     LogHTML.screenshot("Report opened")
@@ -93,7 +97,7 @@ def input_text(browser, report_name):
     except:
         fail_test(browser, "Search did not show result")
     click(lambda: divSearchDropDown(browser).find_element_by_xpath("./div[@tabindex=0]"))
-    wait(7)
+    wait(3)
 
 
 

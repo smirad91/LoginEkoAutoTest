@@ -38,7 +38,8 @@ def divWeedsAddFilter(browser):
 
 
 def wait_filter_loaded(browser):
-    wait_until(lambda: len(divCrops(browser).find_elements_by_xpath('./div[2]/*')) > 3)
+    wait_until(lambda: len(divCrops(browser).find_elements_by_xpath('./div[2]/*')) > 3,
+               timeout=10, errorMessage="Filter menu from left side not loaded")
     LogHTML.info("Filter menu loaded")
 
 
@@ -72,41 +73,47 @@ def get_monitor_list_items(browser):
 def show_more_crops(browser):
     list_number_before = len(get_crop_list_items(browser))
     click(lambda: divShowMoreCrops(browser))
-    wait_until(lambda: list_number_before < len(get_crop_list_items(browser)))
+    wait_until(lambda: list_number_before < len(get_crop_list_items(browser)),
+               timeout=5, errorMessage="Show more crops not executed successfully")
 
 
 def show_less_crops(browser):
     list_number_before = len(get_crop_list_items(browser))
     click(lambda: divShowMoreCrops(browser))
-    wait_until(lambda: list_number_before > len(get_crop_list_items(browser)))
+    wait_until(lambda: list_number_before > len(get_crop_list_items(browser)),
+               timeout=5, errorMessage="Show less crops not executed successfully")
 
 
 def show_more_operation(browser):
     list_number_before = len(get_operation_list_items(browser))
     click(lambda: divShowMoreOperations(browser))
-    wait_until(lambda: list_number_before < len(get_operation_list_items(browser)))
+    wait_until(lambda: list_number_before < len(get_operation_list_items(browser)),
+               timeout=5, errorMessage="Show more operations not executed successfully")
 
 
 def show_less_operation(browser):
     list_number_before = len(get_operation_list_items(browser))
     click(lambda: divShowMoreOperations(browser))
-    wait_until(lambda: list_number_before > len(get_operation_list_items(browser)))
+    wait_until(lambda: list_number_before > len(get_operation_list_items(browser)),
+               timeout=5, errorMessage="Show less operations not executed successfully")
 
 
 def show_more_monitoring(browser):
     list_number_before = len(get_monitor_list_items(browser))
     click(lambda: divShowMoreMonitoring(browser))
-    wait_until(lambda: list_number_before > len(get_monitor_list_items(browser)))
+    wait_until(lambda: list_number_before > len(get_monitor_list_items(browser)),
+               errorMessage="Show more monitoring not executed")
 
 
 def show_less_monitoring(browser):
     list_number_before = len(get_monitor_list_items(browser))
     click(lambda: divShowMoreMonitoring(browser))
-    wait_until(lambda: list_number_before > len(get_monitor_list_items(browser)))
+    wait_until(lambda: list_number_before > len(get_monitor_list_items(browser)),
+               timeout=5, errorMessage="Show less monitoring not executed successfully")
 
 
 def check_add_filter_dropdown(browser):
     click(lambda: btnAddFilter(browser))
-    wait_until(lambda: divSoilAddFilter(browser))
-    wait_until(lambda: divRatingsAddFilter(browser))
-    wait_until(lambda: divWeedsAddFilter(browser))
+    wait_until(lambda: divSoilAddFilter(browser), timeout=5, errorMessage="Soil option not in filter")
+    wait_until(lambda: divRatingsAddFilter(browser), timeout=5, errorMessage="Ratings option not in filter")
+    wait_until(lambda: divWeedsAddFilter(browser), timeout=5, errorMessage="Weeds option not in filter")
