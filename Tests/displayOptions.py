@@ -1,7 +1,7 @@
 from Lib.basic.Browser import Browser
 from Lib.basic.Test import fail_test
 from Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
-from Lib.loginEko import Login, Filter, MainDashboard, DisplayOptions
+from Lib.loginEko import Login, Filter, MainDashboard, DisplayOptions, JsonData
 
 browser = None
 
@@ -9,7 +9,7 @@ browser = None
 def before():
     global browser
     browser = Browser()
-    browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
+    browser.go_to(JsonData.get("loginUrl"))
     Login.login_GUI(browser, "e2e_tester", "h3lp1ngh4nd")
     Filter.wait_filter_loaded(browser)
 

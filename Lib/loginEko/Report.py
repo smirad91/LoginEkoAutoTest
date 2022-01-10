@@ -57,17 +57,15 @@ def open_report_with_scroll(browser, report):
         if not opened:
             browser.driver.execute_script("arguments[0].scroll(0, arguments[1])"
                                           , element_for_scroll, scroll_height*index)
-            wait(3)
         if index == 5:
             fail_test(browser, "Report not found in 20 scrolls. Stop the test")
     wait_until(lambda: divOpenedReport(browser), timeout=5, errorMessage="Report is not opened")
-    wait_until(lambda: report["fieldName"] in divOpenedReport(browser).text, timeout=1,
+    wait_until(lambda: report["fieldName"] in divOpenedReport(browser).text, timeout=5,
                errorMessage="Text not found in opened report. Expected: {}, found: {}."
                .format(report["fieldName"], divOpenedReport(browser).text))
-
     assert_data_on_opened_report(browser, convert_date(report["reportDate"]))
     assert_data_on_opened_report(browser, report["cropEvaluation"])
-    LogHTML.screenshot("Report opened")
+    LogHTML.screenshot(browser, "Report opened")
 
 
 def return_back(browser):
@@ -77,7 +75,8 @@ def return_back(browser):
 
 def assert_data_on_opened_report(browser, date):
     if date not in divOpenedReport(browser).text.lower():
-        fail_test(browser, "Expected data not shown. Expected date: {}".format(date))
+        LogHTML.screenshot("Expected data not shown. Expected data: {}".format(date))
+        fail_test(browser, "Expected data not shown. Expected data: {}".format(date))
 
 
 def input_text(browser, report_name):
@@ -95,7 +94,7 @@ def input_text(browser, report_name):
     try:
         wait_until(lambda: divSearchDropDown(browser).find_element_by_xpath("./div[@tabindex=0]"), timeout=5)
     except:
-        fail_test(browser, "Search did not show result")
+        fail_test(browser, "Search input field did not show result (no options in dropdown from input field)")
     click(lambda: divSearchDropDown(browser).find_element_by_xpath("./div[@tabindex=0]"))
     wait(3)
 

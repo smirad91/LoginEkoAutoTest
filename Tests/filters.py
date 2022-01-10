@@ -1,7 +1,7 @@
 from Lib.basic.Browser import Browser
 from Lib.basic.Test import fail_test
 from Lib.basic.TestDecorator import test, beforeEachTest, afterEachTest
-from Lib.loginEko import Login, Filter
+from Lib.loginEko import Login, Filter, JsonData
 
 browser = None
 
@@ -9,7 +9,7 @@ browser = None
 def before():
     global browser
     browser=Browser()
-    browser.go_to("https://app.dev-shared.gcp.logineko.com/map")
+    browser.go_to(JsonData.get("loginUrl"))
     Login.login_GUI(browser, "e2e_tester", "h3lp1ngh4nd")
     Filter.wait_filter_loaded(browser)
 
@@ -34,22 +34,22 @@ def filterAfterLogin():
 
 @test(dsc="Show more/less crops")
 def showMoreCrops():
-    Filter.show_more_crops(browser)
-    Filter.show_less_crops(browser)
+    if Filter.show_more_or_less_crops(browser, True):
+        Filter.show_more_or_less_crops(browser, False)
 
 
 @test(dsc="Show more/less operations")
 def showMoreOperations():
-    Filter.show_more_operation(browser)
-    Filter.show_less_operation(browser)
+    if Filter.show_more_or_less_operation(browser, True):
+        Filter.show_more_or_less_operation(browser, False)
 
 
 @test(dsc="Show more/less monitor")
 def showMoreMonitor():
-    Filter.show_more_monitoring(browser)
-    Filter.show_less_monitoring(browser)
+    if Filter.show_more_or_less_monitoring(browser, True):
+        Filter.show_more_or_less_monitoring(browser, False)
 
 
 @test(dsc="Check monitoring add filter dropdown")
 def monitoringAddFilter():
-    Filter.check_add_filter_dropdown(browser)
+    Filter.assert_add_filter_fields(browser)

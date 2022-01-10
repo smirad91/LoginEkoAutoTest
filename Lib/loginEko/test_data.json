@@ -14,5 +14,6 @@
     "fieldName": "DJ-6 - EKO",
     "reportDate": "2021-03-06",
     "cropEvaluation": "average"
-  }]
+  }],
+  "loginUrl": "https://app.dev-shared.gcp.logineko.com/map"
 }
